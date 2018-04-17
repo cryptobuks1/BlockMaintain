@@ -13,29 +13,29 @@ class GPUController extends Controller
         return GPU::all();
     }
 
-    public function show($id)
+    public function show(GPU $GPU)
     {
-        return GPU::find($id);
+        return $GPU;
     }
 
     public function store(Request $request)
     {
-        return GPU::create($request->all());
+        $GPU = GPU::create($request->all());
+
+        return response()->json($GPU, 201);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, GPU $GPU)
     {
-        $GPU = GPU::findOrFail($id);
         $GPU->update($request->all());
 
-        return $GPU;
+        return response()->json($GPU, 200);
     }
 
-    public function delete(Request $request, $id)
+    public function delete(GPU $GPU)
     {
-        $GPU = GPU::findOrFail($id);
         $GPU->delete();
 
-        return 204;
+        return response()->json(null, 204);
     }
 }

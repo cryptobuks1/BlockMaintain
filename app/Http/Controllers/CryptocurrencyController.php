@@ -13,29 +13,29 @@ class CryptocurrencyController extends Controller
         return Cryptocurrency::all();
     }
 
-    public function show($id)
+    public function show(Cryptocurrency $Cryptocurrency)
     {
-        return Cryptocurrency::find($id);
+        return $Cryptocurrency;
     }
 
     public function store(Request $request)
     {
-        return Cryptocurrency::create($request->all());
+        $Cryptocurrency = Cryptocurrency::create($request->all());
+
+        return response()->json($Cryptocurrency, 201);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Cryptocurrency $Cryptocurrency)
     {
-        $Cryptocurrency = Cryptocurrency::findOrFail($id);
         $Cryptocurrency->update($request->all());
 
-        return $Cryptocurrency;
+        return response()->json($Cryptocurrency, 200);
     }
 
-    public function delete(Request $request, $id)
+    public function delete(Cryptocurrency $Cryptocurrency)
     {
-        $Cryptocurrency = Cryptocurrency::findOrFail($id);
         $Cryptocurrency->delete();
 
-        return 204;
+        return response()->json(null, 204);
     }
 }
