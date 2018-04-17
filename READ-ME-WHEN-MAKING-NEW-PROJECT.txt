@@ -1,5 +1,0 @@
-you might have to make bootstrap folder public 777.
-make sure to create your own .env file
-php artisan cache:clear
-possibly generate new artisan key for .env file
-install and update composer
