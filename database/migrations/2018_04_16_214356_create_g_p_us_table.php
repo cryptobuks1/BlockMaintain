@@ -13,7 +13,7 @@ class CreateGPUsTable extends Migration
      */
     public function up()
     {
-        Schema::create('g_p_us', function (Blueprint $table) {
+        Schema::create('g_p_u_s', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->decimal('hashes_per_second');
@@ -28,6 +28,6 @@ class CreateGPUsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('g_p_us');
+        Schema::dropIfExists('g_p_u_s');
     }
 }
