@@ -26,6 +26,8 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::post('cryptocurrency', 'CryptocurrencyController@store');
     Route::put('cryptocurrency/{Cryptocurrency}', 'CryptocurrencyController@update');
     Route::delete('cryptocurrency/{Cryptocurrency}', 'CryptocurrencyController@delete');
+
+    Route::get('whattomine/{gpu}/{quantity}','CryptocurrencyController@what_to_mine');
 });
 
 

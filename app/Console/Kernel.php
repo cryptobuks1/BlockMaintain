@@ -25,11 +25,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
-
         $schedule->call(function () {
-            //Cryptocurrency::store_values();
+
+            //Could set this one up to run every hour
+            //Cryptocurrency::generate_coin_data();
+
+            //This will run every minute
+            Cryptocurrency::store_values();
         });
 
 

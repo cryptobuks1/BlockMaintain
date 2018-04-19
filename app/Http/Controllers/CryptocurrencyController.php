@@ -39,7 +39,7 @@ class CryptocurrencyController extends Controller
         return response()->json(null, 204);
     }
 
-    public function calculate_rev($hashes_per_second){
-        return $hashes_per_second / 50;
+    public function what_to_mine($gpu){
+        return Cryptocurrency::what_to_mine($gpu);
     }
 }

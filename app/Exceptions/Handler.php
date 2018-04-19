@@ -53,6 +53,11 @@ class Handler extends ExceptionHandler
             ], 404);
         }
 
+        if($exception){
+            return response()->json([
+                'error' => 'There is a problem with our servers. Please try again later'
+            ], 500);
+        }
 
         return parent::render($request, $exception);
     }
