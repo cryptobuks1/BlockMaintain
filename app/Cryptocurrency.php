@@ -2,37 +2,49 @@
 
 namespace App;
 
+use DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Cryptocurrency extends Model
 {
     //
-    protected $fillable = ['name', 'type', 'value'];
+    protected $fillable = ['symbol','difficulty','algorithm','name', 'type', 'value'];
+    public $primarykey = 'symbol';
 
     public static function store_values(){
 
+        //Coin Values in CAD
+        $json_data = file_get_contents("https://min-api.cryptocompare.com/data/pricemulti?fsyms=ETH,ETC,ZEC,ZEN,BTG,XMR,ORK,XJO,DASH,CANN,START,MUE,FTC,VTC,PXC,MONA,ORB,NOTE,BCH,DEM,BTC,EMC2,GAME,PPC,DGB,NLG,BLC,LTC,TGC,XVG,SXC,ARI,FLO,BTB,NVC,CAT,NYAN,GRS,AUR,OTL,MEC,EMD,SPT,WDC,DOGE,BTA,VIA,UNB,CURE,ACOIN,MZC,CRW,UNO,TRC,NMC&tsyms=CAD");
+        $json_data= json_decode($json_data);
 
-        $json_data = file_get_contents("https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,XMR&tsyms=CAD");
+//        foreach($json_data as $key=>$value){
+//            DB::table('cryptocurrencies')
+//                ->where('symbol', $key)
+//                ->update(array('value' => $value->CAD));
+//        }
 
-        $data = json_decode($json_data);
+
 
         //API key information
         //https://www.coinwarz.com/v1/api/apikeyinfo?apikey=env("COINWARZ_API_KEY")
 
         //Coin Profitability
-        //http://www.coinwarz.com/v1/api/profitability/?apikey=YOUR_API_KEY&algo=all
-//        {"Success":true,"Message":"1,000 api calls remaining.","Data":{"ApiKey":"2aefebfba0a14c1284180de336ec2be3","AccessLevel":"Free","ApiUsageLimit":1000,"ApiUsageAvailable":1000,"DailyUsageLimit":25,"DailyUsageAvailable":25,"Approved":true}}
+        //$json_data = file_get_contents("http://www.coinwarz.com/v1/api/profitability/?apikey=".env("COINWARZ_API_KEY")."&algo=all");
+        //$json_data = json_decode($json_data);
+
+//        if(isset($json_data->Success) && $json_data->Success==1){
+//            foreach($json_data->Data as $coin){
+//
+//                \App\Cryptocurrency::create([
+//                    'symbol' => $coin->CoinTag,
+//                    'name' => $coin->CoinName,
+//                    'difficulty' => $coin->Difficulty,
+//                    'algorithm' => $coin->BlockReward,
+//                    'value' => 0,
+//                ]);
+//            }
+//        }
 
 
-        for($i=0;$i<count($data);$i++){
-            \App\Cryptocurrency::create([
-                'name' => $faker->firstName,
-                'type' => $faker->word,
-                'value' => $faker->numberBetween(0,100),
-            ]);
-        }
-
-
-        print_r($data);
     }
 }

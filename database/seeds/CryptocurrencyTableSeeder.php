@@ -19,9 +19,12 @@ class CryptocurrencyTableSeeder extends Seeder
         // And now, let's create a few articles in our database:
         for ($i = 0; $i < 10; $i++) {
             \App\Cryptocurrency::create([
+                'symbol' => $faker->firstName,
                 'name' => $faker->firstName,
-                'type' => $faker->word,
+                'difficulty' => 2222.3333,
+                'algorithm' => $faker->word,
                 'value' => $faker->numberBetween(0,100),
+
             ]);
         }
     }
